@@ -5,8 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
-  
+  <div id="app">
+    <router-link to='/account'>account</router-link>
+    <router-view></router-view>
+  </div>
+  <template id='tem'>˘
+      <div>
+        <h1>这是主组件</h1>
+        <router-link to='/account/foo'>GO to Foo</router-link>
+        <router-link to='/account/bar'>GO to Bar</router-link>
+        <router-view></router-view>
+      </div>
+   </template>
+  <template id='tem1'>
+     <h1>我是Foo</h1>
+  </template>
+  <template id='tem2'>
+      <h1>我是Bar</h1>˘
+   </template>
+  <script>
+    var Account = {template:'#tem'}
+    var Foo = {template:'#tem1'}
+    var Bar = {template:'#tem2'}
+
+    var router = new VueRouter({
+      routes:[
+        {path:'/account',component:Account,
+        children:[
+          {path:'foo',component:Foo},
+          {path:'bar',component:Bar}
+        ]},
+      ]
+    })
+   // 注册˘
+    Vue.component('child', {
+      // 声明 props
+      props: ['message'],
+      // 同样也可以在 vm 实例中像 “this.messag˘e” 这样使用
+      template: '<span>{{ message }}</span>',
+
+    })
+    // 创建根实例
+    new Vue({
+      el: '#app',
+      router: router,
+    })
+
+  </script>
 </body>
 </html>

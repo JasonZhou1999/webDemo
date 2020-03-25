@@ -9,18 +9,29 @@
 <body>
   <script>
    
-   var fn = {
-     a :4,
-     foo: function () {
-       return ()=> console.log(this.a)
+  //  var fn = {
+  //    a :4,
+  //    foo: function () {
+  //      return ()=> console.log(this.a)
 
-     }
+  //    }
 
-   }  
-    fn.foo()()
-    // var name = 'Bob';
-    console.log(name)
-
+  //  }  
+  //   fn.foo()()
+  //   // var name = 'Bob';
+  //   console.log(name)
+  var obj = {
+      x: 10,
+      foo: function () {
+      var self = this;
+      function f(){
+      console.log(self);      //{x: 10}
+      console.log(self.x);    //10
+      }
+      f();
+    }
+   }
+  obj.foo();
 
   </script>
 </body>
